@@ -1,0 +1,16 @@
+version: "3"
+services:
+  db:
+    image: mariadb:10.10-jammy
+    volumes:
+      - /var/www/database:/var/lib/mysql
+    environment:
+      MYSQL_DATABASE: jetx
+      MYSQL_ROOT_PASSWORD: ${DATABASE_PASSWD}
+    restart: always
+
+  nginx:
+    image: nginx:latest
+    restart: always
+    ports:
+      - "80:80"

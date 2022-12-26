@@ -1,0 +1,14 @@
+FROM docker:cli
+
+ARG PRODUCTION_IP
+ARG STAGING_IP
+
+RUN docker context create \
+    --docker host=ssh://jetxdev@${PRODUCTION_IP} \
+    --description="Production engine" \
+    production-engine
+
+RUN docker context create \
+    --docker host=ssh://jetxdev@${STAGING_IP} \
+    --description="Staging engine" \
+    staging-engine
