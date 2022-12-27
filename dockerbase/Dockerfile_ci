@@ -1,17 +1,16 @@
 FROM docker:cli
 
-ARG PRODUCTION_IP
-ARG STAGING_IP
-
 RUN apk add openssh-client
 
 # Create production docker engine context
+ARG PRODUCTION_IP
 RUN docker context create \
     --docker host=ssh://jetxdev@${PRODUCTION_IP} \
     --description="Production engine" \
     production-engine
 
 # Create staging docker engine context
+ARG STAGING_IP
 RUN docker context create \
     --docker host=ssh://jetxdev@${STAGING_IP} \
     --description="Staging engine" \
