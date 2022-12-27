@@ -3,6 +3,8 @@ FROM docker:cli
 ARG PRODUCTION_IP
 ARG STAGING_IP
 
+RUN apk add openssh-client
+
 # Create production docker engine context
 RUN docker context create \
     --docker host=ssh://jetxdev@${PRODUCTION_IP} \
