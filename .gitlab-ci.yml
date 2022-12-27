@@ -6,7 +6,7 @@ include:
 stages:
   - 📦 Build Image
 
-Build Tool:
+Gitlab CI:
   extends: .build-base
   stage: 📦 Build Image
   variables:
@@ -16,7 +16,7 @@ Build Tool:
     DOCKER_BUILD_ARGS: '--build-arg PRODUCTION_IP=$PRODUCTION_IP --build-arg STAGING_IP=$STAGING_IP'
   when: manual
 
-Build PHP cli:
+PHP cli:
   extends: .build-base
   stage: 📦 Build Image
   variables:
@@ -26,7 +26,7 @@ Build PHP cli:
     DOCKER_BUILD_ARGS: '--build-arg PHP_IMAGE=8.2-cli-alpine'
   when: manual
 
-Build PHP fpm:
+PHP fpm:
   extends: .build-base
   stage: 📦 Build Image
   variables:
