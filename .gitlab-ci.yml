@@ -1,0 +1,54 @@
+stages:
+  - Build
+
+.build-base:
+  image: docker:20.10.16
+  stage: 📦 Build Image
+  services:
+    - docker:20.10.16-dind
+  variables:
+    DOCKER_IMAGE: 'php'
+    DOCKER_TAG: 'v8'
+  script:
+    - docker login -u $REGISTRY_USER -p $REGISTRY_PASSWORD
+    - cd ${WORKING_DIR}
+    - pwd
+    - >
+      docker build
+      ${DOCKER_BUILD_ARGS}
+      -t ${DOCKER_REPOSITORY}/${DOCKER_IMAGE}:${DOCKER_TAG} .
+      -f ${DOCKER_FILE}
+    - docker push ${DOCKER_REPOSITORY}/${DOCKER_IMAGE}:${DOCKER_TAG}
+
+Build Tool:
+  extends: .build-base
+  variables:
+    DOCKER_REPOSITORY: 'jetstudio'
+    DOCKER_IMAGE: 'jetx'
+    WORKING_DIR: 'dockerbase'
+    DOCKER_TAG: 'gitlab-ci'
+    DOCKER_FILE: 'Dockerfile_ci'
+    DOCKER_BUILD_ARGS: '--build-arg PRODUCTION_IP=$PRODUCTION_IP --build-arg STAGING_IP=$STAGING_IP'
+  when: manual
+
+Build PHP cli:
+  extends: .build-base
+  variables:
+    DOCKER_REPOSITORY: 'jetstudio'
+    DOCKER_IMAGE: 'php'
+    WORKING_DIR: 'dockerbase'
+    DOCKER_TAG: 'cli-v8'
+    DOCKER_BUILD_ARGS: '--build-arg PHP_IMAGE=8.2-cli-alpine'
+    DOCKER_FILE: 'Dockerfile_php'
+  when: manual
+
+Build PHP fpm:
+  extends: .build-base
+  variables:
+    DOCKER_REPOSITORY: 'jetstudio'
+    DOCKER_IMAGE: 'php'
+    WORKING_DIR: 'dockerbase'
+    DOCKER_TAG: 'fpm-v8'
+    DOCKER_BUILD_ARGS: '--build-arg PHP_IMAGE=8.2-fpm-alpine'
+    DOCKER_FILE: 'Dockerfile_php'
+  when: manual
