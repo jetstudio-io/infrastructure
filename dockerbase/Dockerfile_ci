@@ -1,6 +1,6 @@
 FROM docker:cli
 
-RUN apk add openssh-client
+RUN apk add openssh-client git
 
 # Create production docker engine context
 ARG PRODUCTION_IP
