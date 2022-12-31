@@ -4,7 +4,7 @@ include:
     file: 'gitlab-ci-template.yml'
 
 variables:
-  DOCKER_HOST: tcp://127.0.0.1:2375
+  DOCKER_HOST: tcp://127.0.0.1:2376
   DOCKER_TLS_CERTDIR: "/certs"
 
 stages:
