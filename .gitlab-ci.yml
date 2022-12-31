@@ -3,6 +3,10 @@ include:
     ref: 'latest'
     file: 'gitlab-ci-template.yml'
 
+variables:
+  DOCKER_HOST: tcp://localhost:2375/
+  DOCKER_TLS_CERTDIR: "/certs"
+
 stages:
   - 📦 Build Image
 
