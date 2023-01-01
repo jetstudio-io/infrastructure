@@ -4,8 +4,8 @@ include:
     file: 'gitlab-ci-template.yml'
 
 variables:
-  DOCKER_HOST: tcp://127.0.0.1:2375
-  DOCKER_TLS_CERTDIR: ""
+  DOCKER_HOST: tcp://docker:2375
+  DOCKER_TLS_CERTDIR: "/certs"
 
 stages:
   - 📦 Build Image
@@ -38,4 +38,5 @@ PHP fpm:
     DOCKER_TAG: 'fpm-v8'
     DOCKER_FILE: 'Dockerfile_php'
     DOCKER_BUILD_ARGS: '--build-arg PHP_IMAGE=8.2-fpm-alpine'
+    PLATFORM: 'linux/amd64,linux/arm64/v8'
   when: manual
