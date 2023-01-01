@@ -1,6 +1,6 @@
 ARG PHP_IMAGE
 FROM composer:2.3.7 AS composer
-FROM php:$PHP_IMAGE
+FROM --platform=linux/arm64/v8 php:$PHP_IMAGE
 
 COPY --from=composer /usr/bin/composer /usr/bin/composer
 
