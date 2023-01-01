@@ -37,6 +37,6 @@ PHP fpm:
     DOCKER_IMAGE: 'php'
     DOCKER_TAG: 'fpm-v8'
     DOCKER_FILE: 'Dockerfile_php'
-    DOCKER_BUILD_ARGS: '--build-arg PHP_IMAGE=8.2-fpm-alpine'
+    DOCKER_BUILD_ARGS: '--build-arg PHP_IMAGE=8.2-fpm-alpine3.16'
     PLATFORM: 'linux/arm64/v8'
   when: manual
