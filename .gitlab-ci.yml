@@ -27,6 +27,8 @@ PHP cli:
   when: manual
 
 PHP fpm:
+  tags:
+    - gitlab-org-docker # specific share runner for this job
   extends: .build-base
   stage: 📦 Build Image
   variables:
@@ -34,5 +36,5 @@ PHP fpm:
     DOCKER_TAG: 'fpm-v8'
     DOCKER_FILE: 'Dockerfile_php'
     DOCKER_BUILD_ARGS: '--build-arg PHP_IMAGE=8.2-fpm-alpine'
-    PLATFORM: 'linux/arm64/v8'
+    PLATFORM: 'linux/amd64,linux/arm64/v8'
   when: manual
