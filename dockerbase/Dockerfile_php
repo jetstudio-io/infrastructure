@@ -9,10 +9,10 @@ RUN set -eux
 RUN apk add --update git bash gettext
 ## Install build tool & PHP extension ###
 RUN apk add --update --no-cache --virtual .build-deps \
-	$PHPIZE_DEPS icu-dev libssh2-dev libxml2-dev zlib-dev libzip-dev zip jpeg-dev libpng-dev linux-headers && \
+	$PHPIZE_DEPS icu-dev libssh2-dev libxml2-dev zlib-dev libzip-dev zip jpeg-dev libpng-dev linux-headers postgresql-dev && \
 	docker-php-ext-configure zip && \
 	docker-php-ext-configure gd --with-jpeg && \
-	docker-php-ext-install -j$(nproc) intl zip pdo pdo_mysql bcmath exif gd && \
+	docker-php-ext-install -j$(nproc) intl zip pdo pdo_mysql pdo_pgsql bcmath exif gd && \
 	pecl install apcu && \
 	pecl clear-cache && \
 	docker-php-ext-enable apcu opcache && \
