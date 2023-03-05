@@ -1,4 +1,3 @@
 #!/bin/bash
 cp .env.dist .env
-sed -i "s/DATABASE_PASSWD=/DATABASE_PASSWD=${DATABASE_PASSWD}\n/g" .env
 sed -i "s/COMPOSER_GITLAB_TOKEN=/COMPOSER_GITLAB_TOKEN=${COMPOSER_GITLAB_TOKEN}\n/g" .env
