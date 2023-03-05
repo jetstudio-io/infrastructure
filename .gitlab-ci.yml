@@ -5,6 +5,7 @@ include:
 
 stages:
   - 📦 Build Image
+  - 📦 Production Image
 
 Gitlab CI:
   extends: .build-base
@@ -26,15 +27,48 @@ PHP cli:
     DOCKER_BUILD_ARGS: '--build-arg PHP_IMAGE=8.2-cli-alpine'
   when: manual
 
-PHP fpm:
+PHP fpm pg:
   tags:
     - gitlab-org-docker # specific share runner for this job
   extends: .build-base
-  stage: 📦 Build Image
+  stage: 📦 Production Image
   variables:
     DOCKER_IMAGE: 'php'
-    DOCKER_TAG: 'fpm-v8'
+    DOCKER_TAG: 'fpm-v8-pg'
     DOCKER_FILE: 'Dockerfile_php'
     DOCKER_BUILD_ARGS: '--build-arg PHP_IMAGE=8.2-fpm-alpine'
     PLATFORM: 'linux/amd64,linux/arm64/v8'
+    DB_EXT: 'pdo pdo_pgsql'
+    DB_EXT_LIB: 'postgresql-dev'
+  when: manual
+
+PHP fpm mysql:
+  tags:
+    - gitlab-org-docker # specific share runner for this job
+  extends: .build-base
+  stage: 📦 Production Image
+  variables:
+    DOCKER_IMAGE: 'php'
+    DOCKER_TAG: 'fpm-v8-pdo'
+    DOCKER_FILE: 'Dockerfile_php'
+    DOCKER_BUILD_ARGS: '--build-arg PHP_IMAGE=8.2-fpm-alpine'
+    PLATFORM: 'linux/amd64,linux/arm64/v8'
+    DB_EXT: 'pdo pdo_mysql'
+    DB_EXT_LIB: ''
+  when: manual
+
+# Install mysqli for wordpress project
+PHP fpm mysqli:
+  tags:
+    - gitlab-org-docker # specific share runner for this job
+  extends: .build-base
+  stage: 📦 Production Image
+  variables:
+    DOCKER_IMAGE: 'php'
+    DOCKER_TAG: 'fpm-v8-mysqli'
+    DOCKER_FILE: 'Dockerfile_php'
+    DOCKER_BUILD_ARGS: '--build-arg PHP_IMAGE=8.2-fpm-alpine'
+    PLATFORM: 'linux/amd64,linux/arm64/v8'
+    DB_EXT: 'mysqli'
+    DB_EXT_LIB: ''
   when: manual
