@@ -28,8 +28,6 @@ PHP cli:
   when: manual
 
 PHP fpm pg:
-  tags:
-    - gitlab-org-docker # specific share runner for this job
   extends: .build-base
   stage: 📦 Production Image
   variables:
@@ -43,8 +41,6 @@ PHP fpm pg:
   when: manual
 
 PHP fpm mysql:
-  tags:
-    - gitlab-org-docker # specific share runner for this job
   extends: .build-base
   stage: 📦 Production Image
   variables:
@@ -59,8 +55,6 @@ PHP fpm mysql:
 
 # Install mysqli for wordpress project
 PHP fpm mysqli:
-  tags:
-    - gitlab-org-docker # specific share runner for this job
   extends: .build-base
   stage: 📦 Production Image
   variables:
