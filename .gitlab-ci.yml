@@ -34,7 +34,7 @@ PHP fpm pg:
     DOCKER_IMAGE: 'php'
     DOCKER_TAG: 'fpm-v8-pg'
     DOCKER_FILE: 'Dockerfile_php'
-    DOCKER_BUILD_ARGS: '--build-arg PHP_IMAGE=8.2-fpm-alpine --build-arg DB_EXT="pdo pdo_pgsql" --build-arg DB_EXT_LIB=postgresql-dev'
+    DOCKER_BUILD_ARGS: '--build-arg PHP_IMAGE=8.2-fpm-alpine --build-arg DB_EXT=pdo_pgsql --build-arg DB_EXT_LIB=postgresql-dev'
     PLATFORM: 'linux/amd64,linux/arm64/v8'
   when: manual
 
@@ -45,7 +45,7 @@ PHP fpm mysql:
     DOCKER_IMAGE: 'php'
     DOCKER_TAG: 'fpm-v8-pdo'
     DOCKER_FILE: 'Dockerfile_php'
-    DOCKER_BUILD_ARGS: '--build-arg PHP_IMAGE=8.2-fpm-alpine --build-arg DB_EXT="pdo pdo_mysql"'
+    DOCKER_BUILD_ARGS: '--build-arg PHP_IMAGE=8.2-fpm-alpine --build-arg DB_EXT=pdo_mysql'
     PLATFORM: 'linux/amd64,linux/arm64/v8'
   when: manual
 
