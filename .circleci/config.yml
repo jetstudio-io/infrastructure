@@ -12,6 +12,10 @@ jobs:
           version: 20.10.14
           docker_layer_caching: true
       - run:
+          name: Install tools
+          command: |
+            apk add --no-cache curl
+      - run:
           name: Install buildx
           command: |
             BUILDX_BINARY_URL="https://github.com/docker/buildx/releases/download/v0.10.4/buildx-v0.10.4.linux-amd64"
