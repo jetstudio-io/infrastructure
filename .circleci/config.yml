@@ -1,20 +1,15 @@
 version: 2.1
 jobs:
   build-pg:
-    docker:
-      - image: docker:20.10.16
-        auth:
-          username: $REGISTRY_USER
-          password: $REGISTRY_PASSWORD
-      - image: docker:20.10.22-dind
-        command: --mtu=1300 --tls=false
-        auth:
-          username: $REGISTRY_USER
-          password: $REGISTRY_PASSWORD
+    machine:
+      image: ubuntu-2204:2022.04.2
     steps:
       - checkout
-      - run: docker buildx create --use
-      - run: docker buildx build --push --platform linux/amd64,linux/arm64/v8 --build-arg PHP_IMAGE=8.2-fpm-alpine --build-arg DB_EXT=pdo_pgsql --build-arg DB_EXT_LIB=postgresql-dev -t jetstudio/php:fpm-v8-pg . -f dockerbase/Dockerfile_php
+      - run: |
+          echo "$REGISTRY_PASSWORD" | docker login --username $REGISTRY_USER --password-stdin
+      - run: |
+          docker buildx create --use
+          docker buildx build --push --platform linux/amd64,linux/arm64/v8 --build-arg PHP_IMAGE=8.2-fpm-alpine --build-arg DB_EXT=pdo_pgsql --build-arg DB_EXT_LIB=postgresql-dev -t jetstudio/php:fpm-v8-pg . -f dockerbase/Dockerfile_php
 workflows:
   build:
     jobs:
