@@ -6,7 +6,7 @@ jobs:
     steps:
       - checkout
       - run: |
-          echo "$REGISTRY_PASSWORD"
+          echo "$DOCKERHUB_PASSWORD"
 #          echo "$REGISTRY_PASSWORD" | docker login --username $REGISTRY_USER --password-stdin
 #      - run: |
 #          docker buildx create --use
