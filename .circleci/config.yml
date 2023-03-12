@@ -4,7 +4,7 @@ jobs:
     docker:
       - image: docker:20.10.14
     environment:
-      DOCKER_USER: $REGISTRY_USER
+      DOCKER_USER: jetstudio
       DOCKER_PASSWORD: $REGISTRY_PASSWORD
     steps:
       - checkout
