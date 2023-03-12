@@ -10,7 +10,6 @@ jobs:
       - checkout
       - setup_remote_docker:
           version: 20.10.14
-          docker_layer_caching: true
       - run:
           name: Install tools
           command: |
@@ -27,6 +26,10 @@ jobs:
             chmod a+x ~/.docker/cli-plugins/docker-buildx
             docker buildx install
             docker run --rm --privileged tonistiigi/binfmt:latest --install "linux/amd64,linux/arm64/v8"
+      - run:
+          name: Log in to docker hub
+          command: |
+            docker login -u $REGISTRY_USER -p $REGISTRY_PASSWORD
       - run:
           name: Build base image
           command: |
