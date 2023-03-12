@@ -6,6 +6,9 @@ jobs:
         auth:
           username: $REGISTRY_USER
           password: $REGISTRY_PASSWORD
+    environment:
+      REGISTRY_USER: $REGISTRY_USER
+      REGISTRY_PASSWORD: $REGISTRY_PASSWORD
     steps:
       - checkout
       - setup_remote_docker:
