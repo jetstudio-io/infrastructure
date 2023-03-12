@@ -11,9 +11,23 @@ jobs:
       - setup_remote_docker:
           version: 20.10.14
           docker_layer_caching: true
-      - run: |
-          docker buildx create --use
-          docker buildx build --push --platform linux/amd64,linux/arm64/v8 --build-arg PHP_IMAGE=8.2-fpm-alpine --build-arg DB_EXT=pdo_pgsql --build-arg DB_EXT_LIB=postgresql-dev -t jetstudio/php:fpm-v8-pg . -f dockerbase/Dockerfile_php
+      - run:
+          name: Install buildx
+          command: |
+            BUILDX_BINARY_URL="https://github.com/docker/buildx/releases/download/v0.10.4/buildx-v0.10.4.linux-amd64"
+            curl --output docker-buildx \
+                --silent --show-error --location --fail --retry 3 \
+                "$BUILDX_BINARY_URL"
+            mkdir -p ~/.docker/cli-plugins
+            mv docker-buildx ~/.docker/cli-plugins/
+            chmod a+x ~/.docker/cli-plugins/docker-buildx
+            docker buildx install
+            docker run --rm --privileged tonistiigi/binfmt:latest --install "linux/amd64,linux/arm64/v8"
+      - run:
+          name: Build base image
+          command: |
+            docker buildx create --use
+            docker buildx build --push --platform linux/amd64,linux/arm64/v8 --build-arg PHP_IMAGE=8.2-fpm-alpine --build-arg DB_EXT=pdo_pgsql --build-arg DB_EXT_LIB=postgresql-dev -t jetstudio/php:fpm-v8-pg . -f dockerbase/Dockerfile_php
 workflows:
   build:
     jobs:
