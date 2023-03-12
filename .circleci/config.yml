@@ -7,8 +7,8 @@ jobs:
           username: $REGISTRY_USER
           password: $REGISTRY_PASSWORD
     environment:
-      REGISTRY_USER: $REGISTRY_USER
-      REGISTRY_PASSWORD: $REGISTRY_PASSWORD
+      DOCKER_USER: $REGISTRY_USER
+      DOCKER_PASSWORD: $REGISTRY_PASSWORD
     steps:
       - checkout
       - setup_remote_docker:
@@ -32,7 +32,7 @@ jobs:
       - run:
           name: Log in to docker hub
           command: |
-            echo "$REGISTRY_PASSWORD" | docker login -u $REGISTRY_USER --password-stdin
+            echo "$DOCKER_PASSWORD" | docker login -u $DOCKER_USER --password-stdin
       - run:
           name: Build base image
           command: |
