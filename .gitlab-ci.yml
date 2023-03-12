@@ -1,6 +1,6 @@
 include:
   - project: 'jet-studio-io/gitlab-template'
-    ref: 'latest'
+    ref: 'dev-master'
     file: 'gitlab-ci-template.yml'
 
 stages:
