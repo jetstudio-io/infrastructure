@@ -3,9 +3,6 @@ jobs:
   build-pg:
     docker:
       - image: docker:20.10.14
-        auth:
-          username: $REGISTRY_USER
-          password: $REGISTRY_PASSWORD
     environment:
       DOCKER_USER: $REGISTRY_USER
       DOCKER_PASSWORD: $REGISTRY_PASSWORD
