@@ -11,6 +11,10 @@ jobs:
       - setup_remote_docker:
           version: 20.10.14
       - run:
+          name: Log in to docker hub
+          command: |
+            echo "$DOCKER_PASSWORD" | docker login -u $DOCKER_USER --password-stdin
+      - run:
           name: Install tools
           command: |
             apk add --no-cache curl
@@ -26,10 +30,6 @@ jobs:
             chmod a+x ~/.docker/cli-plugins/docker-buildx
             docker buildx install
             docker run --rm --privileged tonistiigi/binfmt:latest --install "linux/amd64,linux/arm64/v8"
-      - run:
-          name: Log in to docker hub
-          command: |
-            echo "$DOCKER_PASSWORD" | docker login -u $DOCKER_USER --password-stdin
       - run:
           name: Build base image
           command: |
