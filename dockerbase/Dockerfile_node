@@ -1,0 +1,19 @@
+ARG NODE_BASE_IMAGE
+FROM node:$NODE_BASE_IMAGE
+
+# Install build essential
+RUN apk add --update --no-cache bash zsh git python3 make
+
+# Update npm version
+RUN npm install --location=global npm@latest
+
+# Install global library/framework
+RUN npm install --location=global @nestjs/cli typescript ts-node
+
+######## Install oh-my-zsh #########
+RUN sh -c "$(wget https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh -O -)"
+
+COPY ./configure_git.sh /
+
+# Expose 20 ports for node js
+EXPOSE 3000

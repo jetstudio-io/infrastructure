@@ -1,7 +1,5 @@
 include:
-  - project: 'jet-studio-io/gitlab-template'
-    ref: 'master'
-    file: 'gitlab-ci-template.yml'
+  - 'gitlab-ci-template.yml'
 
 stages:
   - 📦 Build Image
@@ -15,6 +13,17 @@ Gitlab CI:
     DOCKER_TAG: 'gitlab-ci'
     DOCKER_FILE: 'Dockerfile_ci'
     DOCKER_BUILD_ARGS: '--build-arg PRODUCTION_IP=$PRODUCTION_IP --build-arg STAGING_IP=$STAGING_IP'
+  when: manual
+
+Node 18:
+  extends: .build-base
+  stage: 📦 Build Image
+  variables:
+    DOCKER_IMAGE: 'node'
+    DOCKER_TAG: '18'
+    DOCKER_FILE: 'Dockerfile_node'
+    DOCKER_BUILD_ARGS: '--build-arg NODE_BASE_IMAGE=18-alpine'
+    PLATFORM: 'linux/amd64,linux/arm64/v8'
   when: manual
 
 PHP cli:
