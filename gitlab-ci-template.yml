@@ -15,7 +15,7 @@ variables:
   before_script:
     - apt update && apt install -y buildah
   script:
-    - buildah login -u $REGISTRY_USER -p $REGISTRY_PASSWORD docker.io
+    - buildah login -u $REGISTRY_USER -p $REGISTRY_PASSWORD
     - cd ${WORKING_DIR}
     - buildah manifest create ${MANIFEST_NAME}
     - >
