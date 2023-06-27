@@ -16,7 +16,7 @@ Gitlab CI:
   when: manual
 
 Node 18:
-  extends: .build-base
+  extends: .buildah
   stage: 📦 Build Image
   variables:
     DOCKER_IMAGE: 'node'
