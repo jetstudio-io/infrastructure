@@ -1,5 +1,5 @@
 ARG NODE_BASE_IMAGE
-FROM node:$NODE_BASE_IMAGE
+FROM docker.io/node:$NODE_BASE_IMAGE
 
 # Install build essential
 RUN apk add --update --no-cache bash zsh git python3 make
