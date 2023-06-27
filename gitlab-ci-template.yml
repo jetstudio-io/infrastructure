@@ -13,9 +13,11 @@ variables:
 .buildah:
   image: ubuntu:22.04
   before_script:
-    - apt update && apt install -y buildah
+    - apt update
+    - apt install -y buildah
+    - update-ca-certificates
   script:
-    - buildah login -u $REGISTRY_USER -p $REGISTRY_PASSWORD
+    - buildah login -u $REGISTRY_USER -p $REGISTRY_PASSWORD docker.io
     - cd ${WORKING_DIR}
     - buildah manifest create ${MANIFEST_NAME}
     - >
