@@ -27,7 +27,7 @@ Node 18:
   when: manual
 
 PHP cli:
-  extends: .build-base
+  extends: .buildah
   stage: 📦 Build Image
   variables:
     DOCKER_IMAGE: 'php'
@@ -37,7 +37,7 @@ PHP cli:
   when: manual
 
 PHP fpm pg:
-  extends: .build-base
+  extends: .buildah
   stage: 📦 Production Image
   variables:
     DOCKER_IMAGE: 'php'
@@ -48,7 +48,7 @@ PHP fpm pg:
   when: manual
 
 PHP fpm mysql:
-  extends: .build-base
+  extends: .buildah
   stage: 📦 Production Image
   variables:
     DOCKER_IMAGE: 'php'
@@ -60,7 +60,7 @@ PHP fpm mysql:
 
 # Install mysqli for wordpress project
 PHP fpm mysqli:
-  extends: .build-base
+  extends: .buildah
   stage: 📦 Production Image
   variables:
     DOCKER_IMAGE: 'php'
