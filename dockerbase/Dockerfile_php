@@ -7,7 +7,6 @@ COPY --from=composer /usr/bin/composer /usr/bin/composer
 ARG DB_EXT
 ARG DB_EXT_LIB
 ####### Install essential tool #########
-RUN set -eux
 RUN apk add --update git bash gettext
 ## Install build tool & PHP extension ###
 RUN apk add --update --no-cache --virtual .build-deps \
