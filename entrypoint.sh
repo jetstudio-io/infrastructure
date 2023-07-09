@@ -9,7 +9,10 @@ ARCH=$5
 MANIFEST_NAME="multi-arch"
 
 ### Print script args to debug
-echo "@"
+echo "$@"
+
+### Go to working dir
+cd /infrastructure
 
 ### Build amd64 & arm64 image by default if not preset
 if [ -z "$ARCH" ]
