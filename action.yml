@@ -1,0 +1,38 @@
+name: 'Docker buildah'
+author: 'louis.nguyen@jetstudio.io'
+description: 'Github buildah action which allow to build docker image with buildah and publish to dockerhub.io'
+inputs:
+    dockerfile:
+        description: 'The Dockerfile'
+        required: true
+        default: 'Dockerfile'
+    repository:
+        description: 'The hub.docker.io repository'
+        required: true
+    image:
+        description: 'The hub.docker.io image'
+        required: true
+    tag:
+        description: 'The hub.docker.io image tag'
+        required: true
+        default: 'latest'
+    arch:
+        description: 'The docker arch which will be built'
+        required: false
+        default: 'amd64,arm64'
+
+runs:
+    using: 'docker'
+    image: 'Dockerfile'
+    env:
+        DOCKER_USERNAME: ${DOCKER_USERNAME}
+        DOCKER_PASSWORD: ${DOCKER_PASSWORD}
+    args:
+        - ${{ inputs.dockerfile }}
+        - ${{ inputs.repository }}
+        - ${{ inputs.image }}
+        - ${{ inputs.tag }}
+        - ${{ inputs.arch }}
+branding:
+    icon: package
+    color: orange
