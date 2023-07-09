@@ -13,7 +13,7 @@ echo "$@"
 
 ### Go to working dir
 cd /github/workspace
-ls -la
+cat "$DOCKER_FILE"
 
 ### Build amd64 & arm64 image by default if not preset
 if [ -z "$ARCH" ]
