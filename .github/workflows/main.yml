@@ -1,0 +1,17 @@
+on: [push]
+jobs:
+    build:
+        runs-on: ubuntu-22.04
+        name: Build base image
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v3
+            - name: Buildah
+              uses: ./
+              id: buildah
+              with:
+                  dockerfile: dockerbase/Dockerfile_php
+                  repository: jetstudio
+                  image: php
+                  tag: 8.2
+                  arch: 'amd64,arm64'
