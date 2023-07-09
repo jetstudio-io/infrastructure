@@ -17,7 +17,7 @@ jobs:
                       PHP_IMAGE=8.2-fpm-alpine
                       DB_EXT=pdo_mysql
                   archs: amd64,arm64
-                  workdir: dockerbase
+                  context: dockerbase
             - name: Push image
               id: push-image
               uses: redhat-actions/push-to-registry@v2
