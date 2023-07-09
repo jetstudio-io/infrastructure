@@ -11,12 +11,12 @@ jobs:
               with:
                   image: docker.io/jetstudio/php
                   tags: 8.2
-                  containerfiles: |
-                      ./dockerbase/Dockerfile_php
+                  containerfiles: ./Dockerfile_php
                   build-args: |
                       PHP_IMAGE=8.2-fpm-alpine
                       DB_EXT=pdo_mysql
                   archs: amd64,arm64
+                  workdir: dockerbase
 #            - name: Buildah
 #              uses: ./
 #              id: buildah
