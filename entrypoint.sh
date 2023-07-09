@@ -13,6 +13,7 @@ echo "$@"
 
 ### Go to working dir
 cd /github/workspace
+ls -la
 
 ### Build amd64 & arm64 image by default if not preset
 if [ -z "$ARCH" ]
@@ -24,17 +25,18 @@ IFS=',' read -r -a ARCHES <<< "$ARCH"
 
 ### Login to docker.io & create manifest to build multi-arch
 buildah login -u ${DOCKER_USERNAME} -p ${DOCKER_PASSWORD} docker.io
-buildah manifest create ${MANIFEST_NAME}
+#buildah manifest create ${MANIFEST_NAME}
 
 for ARCH in "${ARCHES[@]}"
 do
-  buildah build \
-    --tag "docker.io/${DOCKER_REPOSITORY}/${DOCKER_IMAGE}:${DOCKER_TAG}" \
-    --manifest ${MANIFEST_NAME} \
-    --arch "$ARCH"
-    ${DOCKER_BUILD_ARGS}
-    ${DOCKER_FILE}
+  echo "$ARCH"
+#  buildah build \
+#    --tag "docker.io/${DOCKER_REPOSITORY}/${DOCKER_IMAGE}:${DOCKER_TAG}" \
+#    --manifest ${MANIFEST_NAME} \
+#    --arch "$ARCH"
+#    ${DOCKER_BUILD_ARGS}
+#    ${DOCKER_FILE}
 done
 
 ### Push to hub.docker.io
-buildah manifest push --all ${MANIFEST_NAME} "docker://docker.io/${DOCKER_REPOSITORY}/${DOCKER_IMAGE}:${DOCKER_TAG}"
+#buildah manifest push --all ${MANIFEST_NAME} "docker://docker.io/${DOCKER_REPOSITORY}/${DOCKER_IMAGE}:${DOCKER_TAG}"
