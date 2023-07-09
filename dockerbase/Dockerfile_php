@@ -1,6 +1,6 @@
 ARG PHP_IMAGE
-FROM docker.io/composer:2.3.7 AS composer
-FROM docker.io/php:$PHP_IMAGE
+FROM docker.io/library/composer:2.3.7 AS composer
+FROM docker.io/library/php:$PHP_IMAGE
 
 COPY --from=composer /usr/bin/composer /usr/bin/composer
 

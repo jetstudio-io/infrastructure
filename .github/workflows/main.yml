@@ -16,9 +16,7 @@ jobs:
                   build-args: |
                       PHP_IMAGE=8.2-fpm-alpine
                       DB_EXT=pdo_mysql
-                  archs: |
-                      amd64
-                      arm64
+                  archs: amd64,arm64
 #            - name: Buildah
 #              uses: ./
 #              id: buildah
