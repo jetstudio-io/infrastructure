@@ -12,7 +12,7 @@ MANIFEST_NAME="multi-arch"
 echo "$@"
 
 ### Go to working dir
-cd /infrastructure
+cd /github/workspace
 
 ### Build amd64 & arm64 image by default if not preset
 if [ -z "$ARCH" ]
