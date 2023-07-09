@@ -25,6 +25,8 @@ runs:
     using: 'docker'
     image: 'Dockerfile'
     env:
+        BUILDAH_ISOLATION: chroot
+        BUILDAH_FORMAT: docker
         DOCKER_USERNAME: ${DOCKER_USERNAME}
         DOCKER_PASSWORD: ${DOCKER_PASSWORD}
     args:

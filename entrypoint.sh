@@ -24,7 +24,7 @@ fi
 IFS=',' read -r -a ARCHES <<< "$ARCH"
 
 ### Login to docker.io & create manifest to build multi-arch
-# buildah login -u ${DOCKER_USERNAME} -p ${DOCKER_PASSWORD} docker.io
+buildah login -u ${DOCKER_USERNAME} -p ${DOCKER_PASSWORD} docker.io
 #buildah manifest create ${MANIFEST_NAME}
 
 for ARCH in "${ARCHES[@]}"
