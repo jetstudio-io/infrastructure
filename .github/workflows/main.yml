@@ -6,10 +6,11 @@ jobs:
         steps:
             - name: Checkout
               uses: actions/checkout@v3
-            - name: Buildah
+            - name: Build image
+              id: build-image
               uses: redhat-actions/buildah-build@v2
               with:
-                  image: docker.io/jetstudio/php
+                  image: php
                   tags: 8.2
                   containerfiles: ./Dockerfile_php
                   build-args: |
@@ -17,12 +18,14 @@ jobs:
                       DB_EXT=pdo_mysql
                   archs: amd64,arm64
                   workdir: dockerbase
-#            - name: Buildah
-#              uses: ./
-#              id: buildah
-#              with:
-#                  dockerfile: dockerbase/Dockerfile_php
-#                  repository: jetstudio
-#                  image: php
-#                  tag: 8.2
-#                  arch: 'amd64,arm64'
+            - name: Push image
+              id: push-image
+              uses: redhat-actions/push-to-registry@v2
+              with:
+                  image: ${{ steps.build-image.outputs.image }}
+                  tags: ${{ steps.build-image.outputs.tags }}
+                  registry: docker.io/jetstudio
+                  username: ${{ secrets.REGISTRY_USER }}
+                  password: ${{ secrets.REGISTRY_PASSWORD }}
+            - name: Image url
+              run: echo "Image pushed to ${{ steps.push-image.outputs.registry-paths }}"
