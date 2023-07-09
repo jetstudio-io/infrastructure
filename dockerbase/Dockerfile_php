@@ -29,6 +29,6 @@ RUN apk add --update --no-cache --virtual .build-deps \
 
 ######## Config PHP ###########
 RUN mv "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini"
-COPY jetx.ini /usr/local/etc/php/conf.d/jetx.ini
+COPY dockerbase/jetx.ini /usr/local/etc/php/conf.d/jetx.ini
 
 EXPOSE 9000
