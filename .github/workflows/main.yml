@@ -7,11 +7,24 @@ jobs:
             - name: Checkout
               uses: actions/checkout@v3
             - name: Buildah
-              uses: ./
-              id: buildah
+              uses: redhat-actions/buildah-build@v2
               with:
-                  dockerfile: dockerbase/Dockerfile_php
-                  repository: jetstudio
-                  image: php
-                  tag: 8.2
-                  arch: 'amd64,arm64'
+                  image: docker.io/jetstudio/php
+                  tags: 8.2
+                  containerfiles: |
+                      ./dockerbase/Dockerfile_php
+                  build-args: |
+                      PHP_IMAGE=8.2-fpm-alpine
+                      DB_EXT=pdo_mysql
+                  archs: |
+                      amd64
+                      arm64
+#            - name: Buildah
+#              uses: ./
+#              id: buildah
+#              with:
+#                  dockerfile: dockerbase/Dockerfile_php
+#                  repository: jetstudio
+#                  image: php
+#                  tag: 8.2
+#                  arch: 'amd64,arm64'

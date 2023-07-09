@@ -8,13 +8,6 @@ ARCH=$5
 ### manifest name
 MANIFEST_NAME="multi-arch"
 
-### Print script args to debug
-echo "$@"
-
-### Go to working dir
-cd /github/workspace
-cat "$DOCKER_FILE"
-
 ### Build amd64 & arm64 image by default if not preset
 if [ -z "$ARCH" ]
 then
